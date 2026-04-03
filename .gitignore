@@ -1,0 +1,30 @@
+# Environments
+.env
+.env.*
+backend/.env
+backend/.env.local
+frontend/.env.local
+
+# Dependencies
+node_modules/
+backend/__pycache__/
+venv/
+
+# Build outputs
+frontend/.next/
+frontend/out/
+build/
+.pnpm-debug.log*
+
+# Secrets
+backend/firebase-service-account.json
+
+# Databases
+prisma/dev.db
+*.sqlite
+*.sqlite-journal
+
+# Misc
+.DS_Store
+uploads/
+Thumbs.db

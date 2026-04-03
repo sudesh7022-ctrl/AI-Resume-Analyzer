@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator py_client {
+  provider = "prisma-client-py"
+  interface = "asyncio"
+  recursive_type_depth = 5
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Users {
+  id         String    @id @default(uuid())
+  email      String    @unique
+  password   String
+  name       String
+  role       String    @default("student")
+  created_at DateTime  @default(now())
+  resumes    Resumes[]
+  jobs       Jobs[]
+}
+
+model Resumes {
+  id          String    @id @default(uuid())
+  user_id     String
+  user        Users      @relation(fields: [user_id], references: [id])
+  file_url    String
+  raw_text    String
+  score       Int       @default(0)
+  uploaded_at DateTime  @default(now())
+  skills      Skills[]
+  matches     Matches[]
+}
+
+model Jobs {
+  id             String    @id @default(uuid())
+  admin_id       String
+  admin          Users      @relation(fields: [admin_id], references: [id])
+  title          String
+  company        String
+  description    String
+  required_skills String
+  is_active      Boolean   @default(true)
+  matches        Matches[]
+}
+
+model Skills {
+  id          String   @id @default(uuid())
+  resume_id   String
+  resume      Resumes  @relation(fields: [resume_id], references: [id])
+  skill_name  String
+  category    String
+  confidence  Float
+}
+
+model Matches {
+  id            String   @id @default(uuid())
+  resume_id     String
+  resume        Resumes  @relation(fields: [resume_id], references: [id])
+  job_id        String
+  job           Jobs     @relation(fields: [job_id], references: [id])
+  match_score   Float
+  missing_skills String
+  matched_at    DateTime @default(now())
+}

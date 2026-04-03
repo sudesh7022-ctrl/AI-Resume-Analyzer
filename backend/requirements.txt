@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pdfplumber
+scikit-learn
+sentence-transformers
+slowapi
+python-multipart
+psycopg2-binary
+python-jose[cryptography]
+pydantic[email]
+python-dotenv
+prisma
+supabase
+pydantic-settings
+

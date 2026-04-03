@@ -1,0 +1,28 @@
+# Dependency folders
+node_modules/
+venv/
+env/
+.venv/
+__pycache__/
+*.pyc
+
+# Next.js
+.next/
+out/
+build/
+
+# Environment files and Secrets
+.env
+.env.local
+backend/.env
+backend/firebase-service-account.json
+
+# Local storage and DB
+backend/uploads/
+prisma/dev.db
+
+# Git and OS files
+.git/
+.gitignore
+.DS_Store
+Thumbs.db
